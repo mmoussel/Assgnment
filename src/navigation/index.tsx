@@ -14,6 +14,7 @@ import { RootStackParamList } from 'src/types/navigation.types';
 import { View } from 'react-native';
 import { PictureScreen } from 'src/screens/picture.screen';
 import { Header } from 'src/components/shared/header.component';
+import { ModelScreen } from 'src/screens/model.screen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -36,7 +37,7 @@ export const Navigation = () => {
           screenOptions={{ headerShown: false, orientation: 'portrait' }}
           initialRouteName={'Picture'}>
           <Stack.Screen name="Picture" component={PictureScreen} />
-          <Stack.Screen name="Model" component={CreateMockScreen} />
+          <Stack.Screen name="Model" component={ModelScreen} />
           <Stack.Screen name="ModelDetails" component={CreateMockScreen} />
         </Stack.Navigator>
       </KeyboardAvoidingView>
