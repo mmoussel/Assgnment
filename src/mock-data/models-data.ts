@@ -1,0 +1,38 @@
+export const mockData = [
+  {
+    code: 'P001',
+    name: 'Printer HS',
+    type: 'Printer HS',
+    cost: 10000,
+    category: 'electronics',
+    description: 'Printer HS Printer HSPrinter HS',
+    image_link: 'printer.png',
+  },
+  {
+    code: 'L0001',
+    name: 'LCD XS',
+    type: 'LCD XS',
+    cost: 10000,
+    category: 'electronics',
+    description: '',
+    image_link: 'lcd.png',
+  },
+  {
+    code: '1',
+    name: 'Laptops',
+    type: 'Laptops',
+    cost: 10000,
+    category: 'electronics',
+    description: '',
+    image_link: 'laptop.png',
+  },
+  {
+    code: '12',
+    name: 'Printer Inc',
+    type: 'Printer Inc',
+    cost: 10000,
+    category: 'others',
+    description: '',
+    image_link: 'printer-inc.png',
+  },
+];

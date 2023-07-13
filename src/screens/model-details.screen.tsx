@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { RootStackScreenProps } from 'src/types/navigation.types';
 import { useRoute, useTheme } from '@react-navigation/native';
 import { Header } from 'src/components/shared/header.component';
@@ -11,6 +11,7 @@ import { Spacer } from 'src/components/shared/spacer.component';
 import { CollapseListItem } from 'src/components/shared/collapse-list-item.component';
 import { AddNoteInput } from 'src/components/model/add-note-input.component';
 import { NotesHistory } from 'src/components/model/notes-history.component';
+import { loadImage } from 'src/utils/images.util';
 
 type NavigationProps = RootStackScreenProps<'ModelDetails'>;
 type ImageInfo = {
@@ -24,6 +25,11 @@ export const ModelDetailsScreen = () => {
   const { params } = useRoute<NavigationProps['route']>();
 
   const { font, spacing, colors } = useTheme();
+
+  const image = useMemo(
+    () => loadImage(params?.model?.image_link as string),
+    [],
+  );
 
   if (!params?.model) {
     return <Text>Not found</Text>;
@@ -58,7 +64,7 @@ export const ModelDetailsScreen = () => {
                 padding: spacing(4),
                 backgroundColor: colors.input,
               }}>
-              <Image source={model.imageLink} style={styles.img} />
+              {image && <Image source={image} style={styles.img} />}
             </View>
           </View>
 

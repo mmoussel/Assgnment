@@ -67,7 +67,8 @@ export const PictureScreen = () => {
               paddingVertical: spacing(3),
               paddingHorizontal: spacing(5),
               ...styles.itemContainer,
-            }}>
+            }}
+            key={opt.title}>
             <View style={styles.itemLeftContainer}>
               <Icon />
 

@@ -1,10 +1,10 @@
 export interface Model {
-  id: string;
+  id: number;
   code: string;
   name: string;
   type: string;
-  cost: string;
+  cost: number;
   category: string;
   description: string;
-  imageLink: number;
+  image_link: string;
 }

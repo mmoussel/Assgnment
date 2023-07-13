@@ -1,9 +1,10 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { Model } from 'src/types/model.types';
 import { useNavigation, useTheme } from '@react-navigation/native';
 import { Spacer } from '../shared/spacer.component';
 import { RootStackScreenProps } from 'src/types/navigation.types';
+import { loadImage } from 'src/utils/images.util';
 
 type NavigationProps = RootStackScreenProps<'Model'>;
 
@@ -18,6 +19,8 @@ export const ModelItem: FC<Props> = ({ model }) => {
     navigate('ModelDetails', { model });
   };
 
+  const image = useMemo(() => loadImage(model.image_link), []);
+
   return (
     <View style={styles.container}>
       <Pressable
@@ -27,7 +30,7 @@ export const ModelItem: FC<Props> = ({ model }) => {
           padding: spacing(4),
           backgroundColor: colors.input,
         }}>
-        <Image source={model.imageLink} style={styles.img} />
+        {image && <Image source={image} style={styles.img} />}
       </Pressable>
 
       <Spacer size={1} />

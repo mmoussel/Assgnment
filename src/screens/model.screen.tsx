@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
@@ -8,9 +8,23 @@ import { Spacer } from 'src/components/shared/spacer.component';
 import { TextInput } from 'src/components/shared/text-input.component';
 import { ModelItem } from 'src/components/model/model-item.component';
 import { Divider } from 'src/components/shared/divider.component';
+import { Model } from 'src/types/model.types';
+import { getModels } from 'src/services/model.service';
 
 export const ModelScreen = () => {
   const { colors, spacing } = useTheme();
+
+  const [models, setModels] = useState<Model[]>([]);
+
+  useEffect(() => {
+    initialLoad();
+  }, []);
+
+  const initialLoad = async () => {
+    const response = await getModels();
+
+    setModels(response);
+  };
 
   return (
     <View style={{ ...styles.root, backgroundColor: colors.background }}>
@@ -27,7 +41,7 @@ export const ModelScreen = () => {
 
         <Spacer />
         <FlatList
-          data={mockData}
+          data={models}
           renderItem={({ item }) => (
             <View style={{ ...styles.root, margin: spacing(2) }} key={item.id}>
               <ModelItem model={item} />
@@ -56,46 +70,3 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 });
-
-const mockData = [
-  {
-    id: '1',
-    code: '1',
-    name: 'Printer HS',
-    type: 'Printer HS',
-    cost: '10000',
-    category: 'Printer HS',
-    description: 'Printer HS',
-    imageLink: require('src/assets/imgs/models/printer.png'),
-  },
-  {
-    id: '1a2',
-    code: '12',
-    name: 'LCD XS',
-    type: 'LCD XS',
-    cost: '10000',
-    category: 'Printer HS',
-    description: 'Printer HS',
-    imageLink: require('src/assets/imgs/models/lcd.png'),
-  },
-  {
-    id: '1sfd',
-    code: '1',
-    name: 'Laptops',
-    type: 'Laptops',
-    cost: '10000',
-    category: 'Printer HS',
-    description: 'Printer HS',
-    imageLink: require('src/assets/imgs/models/laptop.png'),
-  },
-  {
-    id: '12asd2',
-    code: '12',
-    name: 'Printer Inc',
-    type: 'Printer Inc',
-    cost: '10000',
-    category: 'Printer HS',
-    description: 'Printer HS',
-    imageLink: require('src/assets/imgs/models/printer-inc.png'),
-  },
-];
