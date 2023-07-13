@@ -9,11 +9,10 @@ import { Divider } from 'src/components/shared/divider.component';
 import { Spacer } from 'src/components/shared/spacer.component';
 
 import { CollapseListItem } from 'src/components/shared/collapse-list-item.component';
-import { AddNoteInput } from 'src/components/model/add-note-input.component';
-import { NotesHistory } from 'src/components/model/notes-history.component';
 import { loadImage } from 'src/utils/images.util';
 import { getModelById } from 'src/services/model.service';
 import { Model } from 'src/types/model.types';
+import { NotesSection } from 'src/components/model/notes-secion.component';
 
 type NavigationProps = RootStackScreenProps<'ModelDetails'>;
 type ImageInfo = {
@@ -93,7 +92,8 @@ export const ModelDetailsScreen = () => {
                 style={{
                   marginBottom: spacing(2),
                   ...styles.row,
-                }}>
+                }}
+                key={key}>
                 <Text
                   style={{
                     fontFamily: font.family.regular,
@@ -115,30 +115,7 @@ export const ModelDetailsScreen = () => {
           </CollapseListItem>
 
           <CollapseListItem title="Notes">
-            <AddNoteInput />
-
-            <NotesHistory
-              notes={[
-                {
-                  createdAt: '03.02.2021-15:00PM',
-                  details: 'This Item need to be checked',
-                  id: '1',
-                  noteBy: 'Jennifer Smith',
-                },
-                {
-                  createdAt: '03.02.2021-15:00PM',
-                  details: 'This Item need to be checked',
-                  id: '2',
-                  noteBy: 'Jennifer Smith',
-                },
-                {
-                  createdAt: '03.02.2021-15:00PM',
-                  details: 'This Item need to be checked',
-                  id: '13',
-                  noteBy: 'Jennifer Smith',
-                },
-              ]}
-            />
+            <NotesSection modelId={model.id} />
           </CollapseListItem>
         </Layout>
       </View>

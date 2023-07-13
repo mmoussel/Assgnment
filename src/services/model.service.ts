@@ -13,7 +13,7 @@ const db = SQLite.openDatabase(
 export const createModelsTable = async () => {
   await db.transaction(tx => {
     tx.executeSql(
-      ` CREATE TABLE models (
+      ` CREATE TABLE IF NOT EXISTS models (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         code TEXT,
         name TEXT,
@@ -63,7 +63,7 @@ export const getModels = () => {
   return new Promise<Model[]>((resolve, reject) => {
     try {
       db.transaction(tx => {
-        tx.executeSql('SELECT * FROM Models', [], (_, results) => {
+        tx.executeSql('SELECT * FROM models', [], (_, results) => {
           resolve(results.rows.raw());
         });
       });
@@ -78,7 +78,7 @@ export const getModelById = (id: number) => {
     try {
       db.transaction(tx => {
         tx.executeSql(
-          'SELECT * FROM Models WHERE id =?',
+          'SELECT * FROM models WHERE id =?',
           [id],
           (_, results) => {
             const model = results.rows.raw()[0];

@@ -7,6 +7,7 @@ import {
   createModelsTable,
   insertInitialData,
 } from 'src/services/model.service';
+import { createNotesTable } from 'src/services/note.service';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +23,7 @@ const App = () => {
 
       if (!isTableExist) {
         await createModelsTable();
+        await createNotesTable();
         await insertInitialData();
       } else {
       }

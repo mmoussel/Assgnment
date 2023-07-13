@@ -4,16 +4,36 @@ import { TextInput } from '../shared/text-input.component';
 import { SaveIcon } from 'src/assets/svgs';
 import { useTheme } from '@react-navigation/native';
 import { Spacer } from '../shared/spacer.component';
+import { addNewNote } from 'src/services/note.service';
 
-export const AddNoteInput = () => {
+export const AddNoteInput = ({
+  modelId,
+  onSuccess,
+}: {
+  modelId: number;
+  onSuccess: () => void;
+}) => {
   const { colors, font, spacing } = useTheme();
 
   const [value, setValue] = useState('');
 
   const handleChange = (newValue: string) => setValue(newValue);
 
-  const handleSave = () => {
-    setValue('');
+  const handleSave = async () => {
+    if (!value) {
+      return;
+    }
+
+    try {
+      await addNewNote({ details: value, model_id: modelId });
+      setValue('');
+      onSuccess();
+    } catch (error) {
+      console.log(
+        '🚀 ~ file: add-note-input.component.tsx:29 ~ handleSave ~ error:',
+        error,
+      );
+    }
   };
 
   return (
@@ -25,7 +45,8 @@ export const AddNoteInput = () => {
             paddingHorizontal: spacing(4),
             paddingVertical: spacing(1),
           }}
-          onPress={handleSave}>
+          onPress={handleSave}
+          disabled={!value}>
           <SaveIcon />
           <Spacer dir="horizontal" size={1} />
           <Text
@@ -47,6 +68,7 @@ export const AddNoteInput = () => {
         }}
         value={value}
         onChangeText={handleChange}
+        onSubmitEditing={handleSave}
       />
     </View>
   );

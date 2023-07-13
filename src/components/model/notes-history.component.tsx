@@ -21,7 +21,7 @@ export const NotesHistory: FC<Props> = ({ notes }) => {
               fontSize: font.size.md,
               color: colors.text,
             }}>
-            {note.noteBy}
+            {note.note_by}
           </Text>
           <Text
             style={{
@@ -29,7 +29,7 @@ export const NotesHistory: FC<Props> = ({ notes }) => {
               fontSize: font.size.xs,
               color: colors.text,
             }}>
-            {note.createdAt}
+            {note.created_at}
           </Text>
           <Text
             style={{

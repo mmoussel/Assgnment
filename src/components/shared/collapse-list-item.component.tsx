@@ -1,16 +1,12 @@
 import React, { ReactNode, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { useTheme } from '@react-navigation/native';
 
 import { Spacer } from 'src/components/shared/spacer.component';
 import { ArrowBottomIcon, ArrowUpIcon } from 'src/assets/svgs';
 
-import Animated, {
-  FadeInDown,
-  FadeOutUp,
-  Layout,
-} from 'react-native-reanimated';
+import Animated, { Layout } from 'react-native-reanimated';
 import { Divider } from './divider.component';
 
 interface Props {
@@ -51,11 +47,7 @@ export const CollapseListItem = ({
 
       <Spacer size={2} />
 
-      {expanded && (
-        <Animated.View entering={FadeInDown} exiting={FadeOutUp}>
-          {children}
-        </Animated.View>
-      )}
+      {expanded && <View>{children}</View>}
 
       <Divider style={{ marginVertical: spacing(2) }} />
     </Animated.View>
