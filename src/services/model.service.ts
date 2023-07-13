@@ -59,13 +59,17 @@ export const resetDatabase = () => {
   });
 };
 
-export const getModels = () => {
+export const getModels = ({ searchKey }: { searchKey?: string }) => {
   return new Promise<Model[]>((resolve, reject) => {
     try {
       db.transaction(tx => {
-        tx.executeSql('SELECT * FROM models', [], (_, results) => {
-          resolve(results.rows.raw());
-        });
+        tx.executeSql(
+          'SELECT * FROM models WHERE name LIKE ?',
+          [`%${searchKey}%`],
+          (_, results) => {
+            resolve(results.rows.raw());
+          },
+        );
       });
     } catch (error) {
       reject(error);
