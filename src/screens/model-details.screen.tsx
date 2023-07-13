@@ -13,6 +13,7 @@ import { loadImage } from 'src/utils/images.util';
 import { getModelById } from 'src/services/model.service';
 import { Model } from 'src/types/model.types';
 import { NotesSection } from 'src/components/model/notes-secion.component';
+import { EditIcon } from 'src/assets/svgs';
 
 type NavigationProps = RootStackScreenProps<'ModelDetails'>;
 type ImageInfo = {
@@ -61,7 +62,29 @@ export const ModelDetailsScreen = () => {
 
   return (
     <View style={styles.root}>
-      <Header title="Modal Details" />
+      <Header
+        title="Modal Details"
+        leftComponent={
+          <View
+            style={{
+              paddingVertical: spacing(2),
+              paddingHorizontal: spacing(3),
+              backgroundColor: colors.input,
+              ...styles.editButton,
+            }}>
+            <EditIcon />
+            <Spacer dir="horizontal" size={1} />
+            <Text
+              style={{
+                fontFamily: font.family.semiBold,
+                fontSize: font.size.sm,
+                color: colors.text,
+              }}>
+              Edit
+            </Text>
+          </View>
+        }
+      />
 
       <View
         style={{
@@ -166,5 +189,12 @@ const styles = StyleSheet.create({
 
   alignCenter: {
     alignItems: 'center',
+  },
+
+  editButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 17,
+    borderWidth: 0.5,
   },
 });

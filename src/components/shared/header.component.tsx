@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { BackIcon } from 'src/assets/svgs';
 
 import { useNavigation, useTheme } from '@react-navigation/native';
@@ -8,9 +8,10 @@ import { Spacer } from './spacer.component';
 
 interface Props {
   title: string;
+  leftComponent?: ReactNode;
 }
 
-export const Header: FC<Props> = ({ title }) => {
+export const Header: FC<Props> = ({ title, leftComponent }) => {
   const { font, colors, spacing } = useTheme();
   const { canGoBack, goBack } = useNavigation();
 
@@ -55,6 +56,8 @@ export const Header: FC<Props> = ({ title }) => {
           {title}
         </Text>
       </View>
+
+      {leftComponent}
     </View>
   );
 };
@@ -64,6 +67,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: STATUS_BAR_PADDING,
     flexDirection: 'row',
+    alignItems: 'center',
     shadowRadius: 2,
     shadowOpacity: 0.17,
     shadowOffset: {

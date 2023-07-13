@@ -6,3 +6,5 @@ export { default as BarCodeIcon } from './bar-code.svg';
 export { default as ArrowBottomIcon } from './arrow-bottom.svg';
 export { default as ArrowUpIcon } from './arrow-up.svg';
 export { default as SaveIcon } from './save.svg';
+export { default as SuccessIcon } from './success.svg';
+export { default as EditIcon } from './edit.svg';

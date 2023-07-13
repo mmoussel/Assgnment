@@ -4,7 +4,12 @@ import { Header } from 'src/components/shared/header.component';
 import { Layout } from 'src/components/shared/layout.component';
 
 import { useNavigation, useTheme } from '@react-navigation/native';
-import { ArrowRightIcon, StockIcon, VendorsIcon } from 'src/assets/svgs';
+import {
+  ArrowRightIcon,
+  StockIcon,
+  SuccessIcon,
+  VendorsIcon,
+} from 'src/assets/svgs';
 import { Spacer } from 'src/components/shared/spacer.component';
 import {
   RootStackScreenProps,
@@ -51,7 +56,26 @@ export const PictureScreen = () => {
 
   return (
     <View style={{ ...styles.root, backgroundColor: colors.background }}>
-      <Header title="Picture" />
+      <Header
+        title="Picture"
+        leftComponent={
+          <View
+            style={{
+              ...styles.headerItemContainer,
+              marginEnd: spacing(2),
+            }}>
+            <SuccessIcon />
+            <Text
+              style={{
+                fontSize: font.size.xxs,
+                color: colors.text,
+                fontFamily: font.family.bold,
+              }}>
+              Proccess
+            </Text>
+          </View>
+        }
+      />
       <Layout
         contentContainerStyle={{
           ...styles.root,
@@ -97,6 +121,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
+  headerItemContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
