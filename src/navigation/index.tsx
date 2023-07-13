@@ -12,6 +12,8 @@ import { theme } from 'src/theme';
 import { RootStackParamList } from 'src/types/navigation.types';
 
 import { View } from 'react-native';
+import { PictureScreen } from 'src/screens/picture.screen';
+import { Header } from 'src/components/shared/header.component';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -33,9 +35,9 @@ export const Navigation = () => {
         <Stack.Navigator
           screenOptions={{ headerShown: false, orientation: 'portrait' }}
           initialRouteName={'Picture'}>
-          <Stack.Screen name="Picture" component={CreateMockScreen} />
-          <Stack.Screen name="Modal" component={CreateMockScreen} />
-          <Stack.Screen name="ModalDetails" component={CreateMockScreen} />
+          <Stack.Screen name="Picture" component={PictureScreen} />
+          <Stack.Screen name="Model" component={CreateMockScreen} />
+          <Stack.Screen name="ModelDetails" component={CreateMockScreen} />
         </Stack.Navigator>
       </KeyboardAvoidingView>
     </NavigationContainer>
@@ -45,10 +47,13 @@ export const Navigation = () => {
 const CreateMockScreen = ({ route }: any) => {
   const { font } = useTheme();
   return (
-    <View style={styles.container}>
-      <Text style={{ ...styles.title, fontFamily: font.family.semiBold }}>
-        {route.name}
-      </Text>
+    <View>
+      <Header title={route.name} />
+      <View style={styles.container}>
+        <Text style={{ ...styles.title, fontFamily: font.family.semiBold }}>
+          {route.name}
+        </Text>
+      </View>
     </View>
   );
 };
