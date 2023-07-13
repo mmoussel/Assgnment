@@ -7,7 +7,7 @@ export const theme = {
     subtext: '#C1C1C1',
     mutedText: '#BCBCBC',
     disabled: '#E9E9E9',
-    tertiary: '#8F8F8F',
+    tertiary: '#F0F0F0',
     primary: '#4E4E4E',
     background: '#F4F4F4',
     input: '#FFF',
