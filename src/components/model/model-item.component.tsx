@@ -16,7 +16,7 @@ export const ModelItem: FC<Props> = ({ model }) => {
   const { navigate } = useNavigation<NavigationProps['navigation']>();
 
   const onPress = () => {
-    navigate('ModelDetails', { model });
+    navigate('ModelDetails', { modelId: model.id });
   };
 
   const image = useMemo(() => loadImage(model.image_link), []);

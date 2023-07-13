@@ -72,3 +72,26 @@ export const getModels = () => {
     }
   });
 };
+
+export const getModelById = (id: number) => {
+  return new Promise<Model>((resolve, reject) => {
+    try {
+      db.transaction(tx => {
+        tx.executeSql(
+          'SELECT * FROM Models WHERE id =?',
+          [id],
+          (_, results) => {
+            const model = results.rows.raw()[0];
+            if (model) {
+              resolve(model);
+            }
+
+            reject('Not found');
+          },
+        );
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

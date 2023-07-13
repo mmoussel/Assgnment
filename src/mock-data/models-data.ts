@@ -5,7 +5,7 @@ export const mockData = [
     type: 'Printer HS',
     cost: 10000,
     category: 'electronics',
-    description: 'Printer HS Printer HSPrinter HS',
+    description: '..',
     image_link: 'printer.png',
   },
   {

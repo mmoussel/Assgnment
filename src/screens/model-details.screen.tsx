@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { RootStackScreenProps } from 'src/types/navigation.types';
 import { useRoute, useTheme } from '@react-navigation/native';
 import { Header } from 'src/components/shared/header.component';
@@ -12,6 +12,8 @@ import { CollapseListItem } from 'src/components/shared/collapse-list-item.compo
 import { AddNoteInput } from 'src/components/model/add-note-input.component';
 import { NotesHistory } from 'src/components/model/notes-history.component';
 import { loadImage } from 'src/utils/images.util';
+import { getModelById } from 'src/services/model.service';
+import { Model } from 'src/types/model.types';
 
 type NavigationProps = RootStackScreenProps<'ModelDetails'>;
 type ImageInfo = {
@@ -26,16 +28,29 @@ export const ModelDetailsScreen = () => {
 
   const { font, spacing, colors } = useTheme();
 
-  const image = useMemo(
-    () => loadImage(params?.model?.image_link as string),
-    [],
-  );
+  const [model, setModel] = useState<Model | null>(null);
 
-  if (!params?.model) {
+  useEffect(() => {
+    initialLoad();
+  }, []);
+
+  const initialLoad = async () => {
+    const response = await getModelById(params?.modelId as number);
+
+    setModel(response);
+  };
+
+  const image = useMemo(() => {
+    if (!model) {
+      return;
+    }
+
+    return loadImage(model.image_link);
+  }, [model]);
+
+  if (!model) {
     return <Text>Not found</Text>;
   }
-
-  const { model } = params;
 
   const imageInfo: ImageInfo = {
     Model: model.code,
