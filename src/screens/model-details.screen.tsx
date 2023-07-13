@@ -10,6 +10,7 @@ import { Spacer } from 'src/components/shared/spacer.component';
 
 import { CollapseListItem } from 'src/components/shared/collapse-list-item.component';
 import { AddNoteInput } from 'src/components/model/add-note-input.component';
+import { NotesHistory } from 'src/components/model/notes-history.component';
 
 type NavigationProps = RootStackScreenProps<'ModelDetails'>;
 type ImageInfo = {
@@ -94,6 +95,29 @@ export const ModelDetailsScreen = () => {
 
           <CollapseListItem title="Notes">
             <AddNoteInput />
+
+            <NotesHistory
+              notes={[
+                {
+                  createdAt: '03.02.2021-15:00PM',
+                  details: 'This Item need to be checked',
+                  id: '1',
+                  noteBy: 'Jennifer Smith',
+                },
+                {
+                  createdAt: '03.02.2021-15:00PM',
+                  details: 'This Item need to be checked',
+                  id: '2',
+                  noteBy: 'Jennifer Smith',
+                },
+                {
+                  createdAt: '03.02.2021-15:00PM',
+                  details: 'This Item need to be checked',
+                  id: '13',
+                  noteBy: 'Jennifer Smith',
+                },
+              ]}
+            />
           </CollapseListItem>
         </Layout>
       </View>
