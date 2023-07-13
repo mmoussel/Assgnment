@@ -1,14 +1,6 @@
-import SQLite from 'react-native-sqlite-storage';
 import { mockData } from 'src/mock-data/models-data';
 import { Model } from 'src/types/model.types';
-
-const db = SQLite.openDatabase(
-  { name: 'MainDB', location: 'default' },
-  () => {},
-  e => {
-    console.log('🚀 ~ file: App.tsx:10 ~ e: Error in Opening DB🚀', e);
-  },
-);
+import { db } from 'src/utils/db.util';
 
 export const createModelsTable = async () => {
   await db.transaction(tx => {
@@ -49,11 +41,9 @@ export const insertInitialData = async () => {
   return data;
 };
 
-export const resetDatabase = () => {
-  // Drop tables
+export const resetModels = () => {
   db.transaction(tx => {
     tx.executeSql('DROP TABLE IF EXISTS models', [], () => {
-      // Table dropped successfully
       console.log('Table dropped');
     });
   });

@@ -1,27 +1,16 @@
 import { View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { AddNoteInput } from 'src/components/model/add-note-input.component';
 import { NotesHistory } from 'src/components/model/notes-history.component';
-import { Note } from 'src/types/note.types';
-import { getNotesByModelId } from 'src/services/note.service';
+import { useNotes } from 'src/hooks/use-notes.hook';
 
 export const NotesSection = ({ modelId }: { modelId: number }) => {
-  const [notes, setNotes] = useState<Note[]>([]);
-
-  useEffect(() => {
-    getNotes();
-  }, []);
-
-  const getNotes = async () => {
-    const response = await getNotesByModelId(modelId);
-
-    setNotes(response);
-  };
+  const { notes, refetch } = useNotes({ modelId });
 
   return (
     <View>
-      <AddNoteInput modelId={modelId} onSuccess={getNotes} />
+      <AddNoteInput modelId={modelId} onSuccess={refetch} />
 
       <NotesHistory notes={notes} />
     </View>

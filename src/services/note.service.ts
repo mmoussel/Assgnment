@@ -1,13 +1,5 @@
-import SQLite from 'react-native-sqlite-storage';
 import { Note } from 'src/types/note.types';
-
-const db = SQLite.openDatabase(
-  { name: 'MainDB', location: 'default' },
-  () => {},
-  e => {
-    console.log('🚀 ~ file: App.tsx:10 ~ e: Error in Opening DB🚀', e);
-  },
-);
+import { db } from 'src/utils/db.util';
 
 export const createNotesTable = async () => {
   await db.transaction(tx => {

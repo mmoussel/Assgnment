@@ -10,6 +10,7 @@ interface Props {
 }
 export const NotesHistory: FC<Props> = ({ notes }) => {
   const { colors, font, spacing } = useTheme();
+
   const renderItems = useMemo(() => {
     return notes.map((note, index) => {
       const isLastItem = index === notes.length - 1;

@@ -1,4 +1,4 @@
-// i did this functions regarding to the requirement of loading local images dynamically
+// NOTE: i did this functions regarding to the requirement of loading local images dynamically
 export const loadImage = (imageName: string) => {
   let image: number | null;
   switch (imageName) {

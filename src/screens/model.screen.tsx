@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -16,23 +16,14 @@ import { TextInput } from 'src/components/shared/text-input.component';
 import { ModelItem } from 'src/components/model/model-item.component';
 import { Divider } from 'src/components/shared/divider.component';
 import { Model } from 'src/types/model.types';
-import { getModels } from 'src/services/model.service';
+import { useModels } from 'src/hooks/use-model.hook';
 
 export const ModelScreen = () => {
-  const { colors, spacing, font } = useTheme();
-
-  const [models, setModels] = useState<Model[]>([]);
   const [searchKey, setSearchKey] = useState('');
 
-  useEffect(() => {
-    initialLoad();
-  }, [searchKey]);
+  const { colors, spacing, font } = useTheme();
 
-  const initialLoad = async () => {
-    const response = await getModels({ searchKey });
-
-    setModels(response);
-  };
+  const { models } = useModels({ searchKey });
 
   const renderItem: ListRenderItem<Model> = useCallback(
     ({ item }) => (
