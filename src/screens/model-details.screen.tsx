@@ -9,6 +9,7 @@ import { Divider } from 'src/components/shared/divider.component';
 import { Spacer } from 'src/components/shared/spacer.component';
 
 import { CollapseListItem } from 'src/components/shared/collapse-list-item.component';
+import { AddNoteInput } from 'src/components/model/add-note-input.component';
 
 type NavigationProps = RootStackScreenProps<'ModelDetails'>;
 type ImageInfo = {
@@ -89,6 +90,10 @@ export const ModelDetailsScreen = () => {
                 </Text>
               </View>
             ))}
+          </CollapseListItem>
+
+          <CollapseListItem title="Notes">
+            <AddNoteInput />
           </CollapseListItem>
         </Layout>
       </View>
