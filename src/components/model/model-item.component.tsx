@@ -1,18 +1,27 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { FC } from 'react';
 import { Model } from 'src/types/model.types';
-import { useTheme } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import { Spacer } from '../shared/spacer.component';
+import { RootStackScreenProps } from 'src/types/navigation.types';
+
+type NavigationProps = RootStackScreenProps<'Model'>;
 
 interface Props {
   model: Model;
 }
 export const ModelItem: FC<Props> = ({ model }) => {
   const { font, colors, spacing } = useTheme();
+  const { navigate } = useNavigation<NavigationProps['navigation']>();
+
+  const onPress = () => {
+    navigate('ModelDetails', { model });
+  };
 
   return (
     <View style={styles.container}>
       <Pressable
+        onPress={onPress}
         style={{
           ...styles.imgContainer,
           padding: spacing(4),
